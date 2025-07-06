@@ -7,17 +7,26 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-gradient-to-br from-blue-600 to-purple-700 text-white min-h-screen flex flex-col">
-  <video autoplay muted loop id="video-bg">
+<body class="bg-gradient-to-br from-blue-600 to-purple-700 text-white min-h-screen flex flex-col relative">
+
+  <!-- Vídeo com controle de som -->
+  <video id="video-bg" autoplay loop class="w-full h-auto">
     <source src="video.mp4" type="video/mp4" />
     Seu navegador não suporta vídeo em HTML5.
   </video>
 
+  <!-- Botão de áudio -->
+  <button id="audioToggle" class="absolute top-4 right-4 z-50 bg-white bg-opacity-30 hover:bg-opacity-50 p-3 rounded-full shadow-lg transition">
+    <span id="audioIcon">🔇</span>
+  </button>
+
+  <!-- Cabeçalho -->
   <header class="text-center py-6">
     <h1 class="text-4xl font-bold">Para o amor da minha vida ❤️</h1>
     <p class="text-lg text-white-200 mt-2">Cada momento ao seu lado é inesquecível</p>
   </header>
 
+  <!-- Galeria de fotos -->
   <main class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
     <div class="card-foto">
       <img src="fotos/IMG-20241014-WA0054.jpg" alt="IMG-20241014-WA0054.jpg" class="w-full h-64 object-cover" />
@@ -45,6 +54,7 @@
     </div>
   </main>
 
+  <!-- Botão surpresa e mensagem -->
   <div class="flex flex-col items-center mt-10">
     <button id="surpriseBtn" class="bg-gradient-to-r from-pink-500 to-purple-500 hover:scale-105 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300">
       Clique Aqui 💖
@@ -59,7 +69,9 @@
   </div>
   <br>
 
+  <!-- Scripts -->
   <script>
+    // Controle do botão surpresa
     const btn = document.getElementById("surpriseBtn");
     const msg = document.getElementById("message");
 
@@ -67,9 +79,11 @@
       const heart = document.createElement("div");
       heart.classList.add("heart");
       heart.textContent = "❤️";
+      heart.style.position = "fixed";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.bottom = "0";
-      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      heart.style.fontSize = "2rem";
+      heart.style.animation = "rise 5s ease-in forwards";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 5000);
     }
@@ -82,7 +96,39 @@
       msg.classList.remove("hidden");
       startHearts();
     });
+
+    // Controle de som do vídeo
+    const video = document.getElementById("video-bg");
+    const toggleBtn = document.getElementById("audioToggle");
+    const audioIcon = document.getElementById("audioIcon");
+
+    video.muted = true;
+
+    toggleBtn.addEventListener("click", () => {
+      video.muted = !video.muted;
+      audioIcon.textContent = video.muted ? "🔇" : "🔊";
+    });
   </script>
+
+  <!-- Estilos adicionais (para o efeito de coração subindo) -->
+  <style>
+    @keyframes rise {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+
+    .heart {
+      position: fixed;
+      z-index: 100;
+      animation: rise 5s ease-in forwards;
+    }
+  </style>
 
 </body>
 </html>
