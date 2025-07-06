@@ -9,34 +9,34 @@
   </head>
   <body class="bg-black text-white min-h-screen flex flex-col relative">
 
-    <!-- Loading/Placeholder do vídeo (com degradê novo) -->
+    
     <div id="video-placeholder" class="fixed inset-0 bg-gradient-to-br from-[#f3a673] via-[#d3a5a0] to-[#3b4c63] flex items-center justify-center z-5 transition-opacity duration-1000">
       <div class="text-center">
         <div class="animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent mb-4 mx-auto"></div>
       </div>
     </div>
 
-    <!-- Vídeo com controle de som -->
+    
     <video id="video-bg" autoplay loop muted class="w-full h-auto opacity-0 transition-opacity duration-1000" preload="metadata"
       poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23f3a673'/%3E%3Cstop offset='50%25' stop-color='%23d3a5a0'/%3E%3Cstop offset='100%25' stop-color='%233b4c63'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3C/svg%3E">
       <source src="video.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo em HTML5.
     </video>
 
-    <!-- Botão de áudio com posicionamento responsivo -->
+    
     <button id="audioToggle" class="fixed z-50 bg-white bg-opacity-30 hover:bg-opacity-50 p-3 rounded-full shadow-lg transition backdrop-blur">
       <span id="audioIcon">🔇</span>
     </button>
 
-    <!-- Cabeçalho -->
+    
     <header id="header" class="text-center py-6 relative z-10">
       <h1 class="text-4xl font-bold">Para o amor da minha vida ❤️</h1>
       <p class="text-lg text-white mt-2">Cada momento ao seu lado é inesquecível</p>
     </header>
 
-    <!-- Galeria de fotos -->
+    
     <main class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto relative z-10">
-      <!-- Suas imagens -->
+      
       <div class="card-foto"><img src="fotos/IMG-20241014-WA0054.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
       <div class="card-foto"><img src="fotos/IMG-20230924-WA0014.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
       <div class="card-foto"><img src="fotos/IMG_8883.JPG" class="w-full h-64 object-cover" loading="lazy" /></div>
@@ -47,7 +47,7 @@
       <div class="card-foto"><img src="fotos/IMG_6342.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
     </main>
 
-    <!-- Botão surpresa e mensagem -->
+    
     <div class="flex flex-col items-center mt-10 relative z-10">
       <button id="surpriseBtn" class="bg-gradient-to-r from-pink-500 to-purple-500 hover:scale-105 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300">
         Clique Aqui 💖
@@ -62,123 +62,7 @@
     </div>
     <br>
 
-    <!-- Scripts -->
-    <script>
-      const btn = document.getElementById("surpriseBtn");
-      const msg = document.getElementById("message");
-
-      function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.textContent = "❤️";
-        heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.bottom = "0";
-        heart.style.fontSize = "2rem";
-        heart.style.animation = "rise 5s ease-in forwards";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-      }
-
-      function startHearts() {
-        setInterval(createHeart, 400);
-      }
-
-      btn.addEventListener("click", () => {
-        msg.classList.remove("hidden");
-        startHearts();
-      });
-
-      // Controle do vídeo e placeholder
-      const video = document.getElementById("video-bg");
-      const toggleBtn = document.getElementById("audioToggle");
-      const audioIcon = document.getElementById("audioIcon");
-      const videoPlaceholder = document.getElementById("video-placeholder");
-
-      video.muted = true;
-
-      video.addEventListener('loadeddata', () => {
-        video.style.opacity = '1';
-        videoPlaceholder.style.opacity = '0';
-        setTimeout(() => {
-          videoPlaceholder.style.display = 'none';
-        }, 1000);
-      });
-
-      setTimeout(() => {
-        if (video.readyState < 2) {
-          videoPlaceholder.style.opacity = '0';
-          setTimeout(() => {
-            videoPlaceholder.style.display = 'none';
-          }, 1000);
-        }
-      }, 5000);
-
-      toggleBtn.addEventListener("click", () => {
-        video.muted = !video.muted;
-        audioIcon.textContent = video.muted ? "🔇" : "🔊";
-      });
-
-      function positionAudioButton() {
-        const isMobile = window.innerWidth < 768;
-        const header = document.getElementById("header");
-        const surpriseBtn = document.getElementById("surpriseBtn");
-        const headerRect = header.getBoundingClientRect();
-        const surpriseBtnRect = surpriseBtn.getBoundingClientRect();
-
-        if (isMobile) {
-          if (headerRect.bottom > 0) {
-            toggleBtn.style.top = 'auto';
-            toggleBtn.style.bottom = '1rem';
-            toggleBtn.style.right = '1rem';
-            toggleBtn.style.left = 'auto';
-          } else {
-            const maxTop = Math.max(surpriseBtnRect.top - 60, 16);
-            toggleBtn.style.top = Math.min(16, maxTop) + 'px';
-            toggleBtn.style.bottom = 'auto';
-            toggleBtn.style.right = '1rem';
-            toggleBtn.style.left = 'auto';
-          }
-        } else {
-          toggleBtn.style.top = 'auto';
-          toggleBtn.style.bottom = '1rem';
-          toggleBtn.style.right = '1rem';
-          toggleBtn.style.left = 'auto';
-        }
-      }
-
-      positionAudioButton();
-      window.addEventListener('resize', positionAudioButton);
-      window.addEventListener('scroll', positionAudioButton);
-    </script>
-
-    <!-- Estilos -->
-    <style>
-      @keyframes rise {
-        0% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-100vh);
-          opacity: 0;
-        }
-      }
-
-      .heart {
-        position: fixed;
-        z-index: 100;
-        animation: rise 5s ease-in forwards;
-      }
-
-      #audioToggle {
-        transition: all 0.3s ease;
-      }
-
-      #video-placeholder {
-        transition: opacity 1s ease;
-      }
-    </style>
+    <script src="script.js"></script>
 
   </body>
 </html>
