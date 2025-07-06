@@ -7,10 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="bg-gradient-to-br from-blue-600 to-purple-700 text-white min-h-screen flex flex-col relative">
+  <body class="bg-black text-white min-h-screen flex flex-col relative">
+
+    <!-- Loading/Placeholder do vídeo (com degradê novo) -->
+    <div id="video-placeholder" class="fixed inset-0 bg-gradient-to-br from-[#f3a673] via-[#d3a5a0] to-[#3b4c63] flex items-center justify-center z-5 transition-opacity duration-1000">
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent mb-4 mx-auto"></div>
+      </div>
+    </div>
 
     <!-- Vídeo com controle de som -->
-    <video id="video-bg" autoplay loop class="w-full h-auto">
+    <video id="video-bg" autoplay loop muted class="w-full h-auto opacity-0 transition-opacity duration-1000" preload="metadata"
+      poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23f3a673'/%3E%3Cstop offset='50%25' stop-color='%23d3a5a0'/%3E%3Cstop offset='100%25' stop-color='%233b4c63'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3C/svg%3E">
       <source src="video.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo em HTML5.
     </video>
@@ -23,35 +31,20 @@
     <!-- Cabeçalho -->
     <header id="header" class="text-center py-6 relative z-10">
       <h1 class="text-4xl font-bold">Para o amor da minha vida ❤️</h1>
-      <p class="text-lg text-white-200 mt-2">Cada momento ao seu lado é inesquecível</p>
+      <p class="text-lg text-white mt-2">Cada momento ao seu lado é inesquecível</p>
     </header>
 
     <!-- Galeria de fotos -->
     <main class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto relative z-10">
-      <div class="card-foto">
-        <img src="fotos/IMG-20241014-WA0054.jpg" alt="IMG-20241014-WA0054.jpg" class="w-full h-64 object-cover" />
-      </div>
-      <div class="card-foto">
-        <img src="fotos/IMG-20230924-WA0014.jpg" alt="IMG-20230924-WA0014.jpg" class="w-full h-64 object-cover" />
-      </div>
-      <div class="card-foto">
-        <img src="fotos/IMG_8883.JPG" alt="IMG_8883.JPG" class="w-full h-64 object-cover" />
-      </div>
-      <div class="card-foto">
-        <img src="fotos/09.45.52_d18e6117.jpg" alt="09.45.52_d18e6117.jpg" class="w-full h-64 object-cover" />
-      </div>
-      <div class="card-foto">
-        <img src="fotos/IMG-20240421-WA0026.jpg" alt="IMG-20240421-WA0026.jpg" class="w-full h-64 object-cover" />
-      </div>
-      <div class="card-foto">
-        <img src="fotos/IMG-20240613-WA0007.jpg" alt="IMG-20240613-WA0007.jpg" class="w-full h-64 object-cover" />
-      </div>
-      <div class="card-foto">
-        <img src="fotos/Imagem do WhatsApp 5.jpg" alt="Imagem do WhatsApp 5.jpg" class="w-full h-64 object-cover" />
-      </div>
-      <div class="card-foto">
-        <img src="fotos/IMG_6342.jpg" alt="IMG_6342.JPG" class="w-full h-64 object-cover" />
-      </div>
+      <!-- Suas imagens -->
+      <div class="card-foto"><img src="fotos/IMG-20241014-WA0054.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
+      <div class="card-foto"><img src="fotos/IMG-20230924-WA0014.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
+      <div class="card-foto"><img src="fotos/IMG_8883.JPG" class="w-full h-64 object-cover" loading="lazy" /></div>
+      <div class="card-foto"><img src="fotos/09.45.52_d18e6117.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
+      <div class="card-foto"><img src="fotos/IMG-20240421-WA0026.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
+      <div class="card-foto"><img src="fotos/IMG-20240613-WA0007.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
+      <div class="card-foto"><img src="fotos/Imagem do WhatsApp 5.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
+      <div class="card-foto"><img src="fotos/IMG_6342.jpg" class="w-full h-64 object-cover" loading="lazy" /></div>
     </main>
 
     <!-- Botão surpresa e mensagem -->
@@ -62,7 +55,6 @@
 
       <div class="mt-6 animate-bounce text-5xl">💖</div>
       <p class="text-white mt-2 italic">Você me faz feliz de um jeito que ninguém mais faz 💌</p>
-    
 
       <div id="message" class="mt-8 hidden text-center text-xl max-w-md mx-4 bg-white text-purple-800 p-6 rounded-xl shadow-lg">
         Você é a melhor parte da minha vida, e sem você tudo perde o brilho. Feliz aniversário, meu amor!
@@ -72,7 +64,6 @@
 
     <!-- Scripts -->
     <script>
-      // Controle do botão surpresa
       const btn = document.getElementById("surpriseBtn");
       const msg = document.getElementById("message");
 
@@ -98,46 +89,57 @@
         startHearts();
       });
 
-      // Controle de som do vídeo
+      // Controle do vídeo e placeholder
       const video = document.getElementById("video-bg");
       const toggleBtn = document.getElementById("audioToggle");
       const audioIcon = document.getElementById("audioIcon");
+      const videoPlaceholder = document.getElementById("video-placeholder");
 
       video.muted = true;
+
+      video.addEventListener('loadeddata', () => {
+        video.style.opacity = '1';
+        videoPlaceholder.style.opacity = '0';
+        setTimeout(() => {
+          videoPlaceholder.style.display = 'none';
+        }, 1000);
+      });
+
+      setTimeout(() => {
+        if (video.readyState < 2) {
+          videoPlaceholder.style.opacity = '0';
+          setTimeout(() => {
+            videoPlaceholder.style.display = 'none';
+          }, 1000);
+        }
+      }, 5000);
 
       toggleBtn.addEventListener("click", () => {
         video.muted = !video.muted;
         audioIcon.textContent = video.muted ? "🔇" : "🔊";
       });
 
-      // Função para posicionar o botão de áudio responsivamente
       function positionAudioButton() {
-        const isMobile = window.innerWidth < 768; // Telas menores que 768px
+        const isMobile = window.innerWidth < 768;
         const header = document.getElementById("header");
         const surpriseBtn = document.getElementById("surpriseBtn");
         const headerRect = header.getBoundingClientRect();
         const surpriseBtnRect = surpriseBtn.getBoundingClientRect();
-        const scrollY = window.scrollY;
 
         if (isMobile) {
-          // Em dispositivos móveis
           if (headerRect.bottom > 0) {
-            // Se o header ainda está visível, posiciona o botão no canto inferior direito
             toggleBtn.style.top = 'auto';
             toggleBtn.style.bottom = '1rem';
             toggleBtn.style.right = '1rem';
             toggleBtn.style.left = 'auto';
           } else {
-            // Se o header saiu da tela, posiciona no canto superior direito
-            // Mas limita a posição para não ir além do botão "Clique Aqui"
-            const maxTop = Math.max(surpriseBtnRect.top - 60, 1 * 16); // 1rem = 16px
-            toggleBtn.style.top = Math.min(1 * 16, maxTop) + 'px';
+            const maxTop = Math.max(surpriseBtnRect.top - 60, 16);
+            toggleBtn.style.top = Math.min(16, maxTop) + 'px';
             toggleBtn.style.bottom = 'auto';
             toggleBtn.style.right = '1rem';
             toggleBtn.style.left = 'auto';
           }
         } else {
-          // Em telas maiores, mantém sempre no canto inferior direito
           toggleBtn.style.top = 'auto';
           toggleBtn.style.bottom = '1rem';
           toggleBtn.style.right = '1rem';
@@ -145,15 +147,12 @@
         }
       }
 
-      // Posiciona o botão inicialmente
       positionAudioButton();
-
-      // Reposiciona o botão quando a tela é redimensionada ou quando há scroll
       window.addEventListener('resize', positionAudioButton);
       window.addEventListener('scroll', positionAudioButton);
     </script>
 
-    <!-- Estilos adicionais (para o efeito de coração subindo) -->
+    <!-- Estilos -->
     <style>
       @keyframes rise {
         0% {
@@ -172,9 +171,12 @@
         animation: rise 5s ease-in forwards;
       }
 
-      /* Transição suave para o botão de áudio */
       #audioToggle {
         transition: all 0.3s ease;
+      }
+
+      #video-placeholder {
+        transition: opacity 1s ease;
       }
     </style>
 
