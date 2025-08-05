@@ -1,4 +1,3 @@
-
 const btn = document.getElementById("surpriseBtn");
 const msg = document.getElementById("message");
 const video = document.getElementById("video-bg");
@@ -86,3 +85,19 @@ toggleBtn.addEventListener("click", () => {
 positionAudioButton();
 window.addEventListener('resize', positionAudioButton);
 window.addEventListener('scroll', positionAudioButton);
+
+// Flip card ao dar duplo clique (desktop) ou toque duplo (mobile)
+document.querySelectorAll('.flip-card-inner').forEach(card => {
+  let lastTap = 0;
+  card.addEventListener('dblclick', function (e) {
+    e.currentTarget.classList.toggle('flipped');
+  });
+  card.addEventListener('touchend', function (e) {
+    const now = new Date().getTime();
+    if (now - lastTap < 400) {
+      e.currentTarget.classList.toggle('flipped');
+      e.preventDefault();
+    }
+    lastTap = now;
+  });
+});
