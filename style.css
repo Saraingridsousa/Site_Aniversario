@@ -43,15 +43,15 @@ main {
 @media (max-width: 480px) {
   main {
     grid-template-columns: 1fr;
-    gap: 1rem; /* aumenta o espaçamento entre as imagens */
+    gap: 2rem; /* aumenta o espaçamento entre as imagens */
     padding: 1rem;
   }
   .card-foto {
-    height: 300px;      /* aumenta a altura */
-    width: 100%;
+    height: 300px;      
+    width: 85%;
     min-width: 0;
     margin: 0 auto; 
-    aspect-ratio: unset; /* remove proporção quadrada */
+    aspect-ratio: unset; 
   }
 }
 
@@ -61,6 +61,7 @@ main {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     padding: 0.75rem;
+    gap: 2rem;
   }
   .card-foto {
     height: 220px;
