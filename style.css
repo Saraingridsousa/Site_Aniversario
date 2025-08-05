@@ -1,4 +1,4 @@
-
+/* ===== Fundo com vídeo ===== */
 #video-bg {
   position: fixed;
   top: 0;
@@ -8,16 +8,7 @@
   object-fit: cover;
   z-index: -1;
 }
-
-.heart {
-  position: fixed;
-  font-size: 30px;
-  color: red;
-  animation: floatHearts 5s linear forwards;
-  pointer-events: none;
-  z-index: 9999;
-}
-
+/* ===== Animação dos corações ===== */
 @keyframes floatHearts {
   0% {
     transform: translateY(100vh) scale(0.5);
@@ -29,40 +20,117 @@
   }
 }
 
+@keyframes rise {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+.heart {
+  position: fixed;
+  font-size: 30px;
+  color: red;
+  z-index: 100;
+  pointer-events: none;
+  animation: rise 5s ease-in forwards;
+}
+
+/* ===== Imagem estilo card ===== */
 .card-foto {
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   background-color: white;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .card-foto:hover {
   transform: scale(1.05);
- 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
- @keyframes rise {
-        0% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-100vh);
-          opacity: 0;
-        }
-      }
 
-      .heart {
-        position: fixed;
-        z-index: 100;
-        animation: rise 5s ease-in forwards;
-      }
+/* ===== Flip Card - geral ===== */
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
 
-      #audioToggle {
-        transition: all 0.3s ease;
-      }
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+/*ERRO ESTÁ A PARTIR DAQUI*/
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
 
-      #video-placeholder {
-        transition: opacity 1s ease;
-      }
+.flip-card-front img,
+.flip-card-back img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+
+/* ===== Flip directions ===== 
+
+/* Horizontal - LEFT */
+.flip-horizontal-left:hover .flip-card-inner {
+  transform: rotateY(-180deg);
+}
+.flip-horizontal-left .flip-card-back {
+  transform: rotateY(-180deg);
+}
+
+/* Horizontal - RIGHT */
+.flip-horizontal-right:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-horizontal-right .flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Vertical - UP */
+.flip-vertical-up:hover .flip-card-inner {
+  transform: rotateX(180deg);
+}
+.flip-vertical-up .flip-card-back {
+  transform: rotateX(180deg);
+}
+
+/* Vertical - DOWN */
+.flip-vertical-down:hover .flip-card-inner {
+  transform: rotateX(-180deg);
+}
+.flip-vertical-down .flip-card-back {
+  transform: rotateX(-180deg);
+}*/
+
+/* ===== Transições diversas ===== */
+#audioToggle {
+  transition: all 0.3s ease;
+}
+
+#video-placeholder {
+  transition: opacity 1s ease;
+}
