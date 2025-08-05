@@ -40,6 +40,34 @@ main {
   }
 }
 
+@media (max-width: 480px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .card-foto {
+    height: 180px;
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Ajuste para tablets */
+@media (min-width: 481px) and (max-width: 767px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  .card-foto {
+    height: 220px;
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
 /* ===== Animação dos corações ===== */
 @keyframes floatHearts {
   0% {
