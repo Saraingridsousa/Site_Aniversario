@@ -8,6 +8,38 @@
   object-fit: cover;
   z-index: -1;
 }
+
+/* ===== Layout do grid principal ===== */
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Responsividade do grid */
+@media (min-width: 640px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* ===== Animação dos corações ===== */
 @keyframes floatHearts {
   0% {
@@ -48,10 +80,9 @@
   transition: all 0.3s ease;
   background-color: white;
   position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.5rem;
-  overflow: hidden;
+  width: 95%;
+  height: 320px;
+  aspect-ratio: 1; /* Mantém proporção quadrada */
 }
 
 .card-foto:hover {
@@ -74,13 +105,15 @@
   transition: transform 1s;
   transform-style: preserve-3d;
 }
-/*ERRO ESTÁ A PARTIR DAQUI*/
+
 .flip-card-front,
 .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  top: 0;
+  left: 0;
 }
 
 .flip-card-front img,
@@ -89,10 +122,10 @@
   height: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
+  display: block;
 }
 
-
-/* ===== Flip directions ===== 
+/* ===== Flip directions ===== */
 
 /* Horizontal - LEFT */
 .flip-horizontal-left:hover .flip-card-inner {
@@ -124,7 +157,7 @@
 }
 .flip-vertical-down .flip-card-back {
   transform: rotateX(-180deg);
-}*/
+}
 
 /* ===== Transições diversas ===== */
 #audioToggle {
