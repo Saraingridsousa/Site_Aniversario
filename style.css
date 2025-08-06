@@ -40,6 +40,37 @@ main {
   }
 }
 
+@media (max-width: 480px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 2rem; /* aumenta o espaçamento entre as imagens */
+    padding: 1rem;
+  }
+  .card-foto {
+    height: 300px;      
+    width: 85%;
+    min-width: 0;
+    margin: 0 auto; 
+    aspect-ratio: unset; 
+  }
+}
+
+/* Ajuste para tablets */
+@media (min-width: 481px) and (max-width: 767px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0.75rem;
+    gap: 2rem;
+  }
+  .card-foto {
+    height: 220px;
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
 /* ===== Animação dos corações ===== */
 @keyframes floatHearts {
   0% {
@@ -78,7 +109,7 @@ main {
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  background-color: white;
+  background-color: transparent; /* Alterado de white para transparente */
   position: relative;
   width: 95%;
   height: 320px;
@@ -128,7 +159,7 @@ main {
 /* ===== Flip directions ===== */
 
 /* Horizontal - LEFT */
-.flip-horizontal-left:hover .flip-card-inner {
+.flip-horizontal-left .flip-card-inner.flipped {
   transform: rotateY(-180deg);
 }
 .flip-horizontal-left .flip-card-back {
@@ -136,7 +167,7 @@ main {
 }
 
 /* Horizontal - RIGHT */
-.flip-horizontal-right:hover .flip-card-inner {
+.flip-horizontal-right .flip-card-inner.flipped {
   transform: rotateY(180deg);
 }
 .flip-horizontal-right .flip-card-back {
@@ -144,7 +175,7 @@ main {
 }
 
 /* Vertical - UP */
-.flip-vertical-up:hover .flip-card-inner {
+.flip-vertical-up .flip-card-inner.flipped {
   transform: rotateX(180deg);
 }
 .flip-vertical-up .flip-card-back {
@@ -152,11 +183,19 @@ main {
 }
 
 /* Vertical - DOWN */
-.flip-vertical-down:hover .flip-card-inner {
+.flip-vertical-down .flip-card-inner.flipped {
   transform: rotateX(-180deg);
 }
 .flip-vertical-down .flip-card-back {
   transform: rotateX(-180deg);
+}
+
+/* Remova os seletores :hover para flip */
+.flip-horizontal-left:hover .flip-card-inner,
+.flip-horizontal-right:hover .flip-card-inner,
+.flip-vertical-up:hover .flip-card-inner,
+.flip-vertical-down:hover .flip-card-inner {
+  /* Remove ou deixe vazio */
 }
 
 /* ===== Transições diversas ===== */

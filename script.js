@@ -1,4 +1,3 @@
-
 const btn = document.getElementById("surpriseBtn");
 const msg = document.getElementById("message");
 const video = document.getElementById("video-bg");
@@ -86,3 +85,41 @@ toggleBtn.addEventListener("click", () => {
 positionAudioButton();
 window.addEventListener('resize', positionAudioButton);
 window.addEventListener('scroll', positionAudioButton);
+
+// Efeito de "zoom" suave nas imagens visíveis em dispositivos pequenos
+function scaleCardsOnScroll() {
+  if (window.innerWidth > 640) return; // Só em telas pequenas
+
+  document.querySelectorAll('.card-foto').forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const cardMiddle = rect.top + rect.height / 2;
+    const windowMiddle = window.innerHeight / 2;
+    const distance = Math.abs(cardMiddle - windowMiddle);
+
+    // Quanto mais perto do centro, maior o scale (máx 1.07, min 1)
+    let scale = 1 + Math.max(0, 0.07 - distance / window.innerHeight * 0.14);
+    card.style.transform = `scale(${scale})`;
+    card.style.transition = 'transform 0.3s cubic-bezier(.4,2,.6,1)';
+    card.style.zIndex = scale > 1.01 ? 20 : 1;
+  });
+}
+
+window.addEventListener('scroll', scaleCardsOnScroll);
+window.addEventListener('resize', scaleCardsOnScroll);
+scaleCardsOnScroll();
+
+// Flip card ao dar duplo clique (desktop) ou toque duplo (mobile)
+document.querySelectorAll('.flip-card-inner').forEach(card => {
+  let lastTap = 0;
+  card.addEventListener('dblclick', function (e) {
+    e.currentTarget.classList.toggle('flipped');
+  });
+  card.addEventListener('touchend', function (e) {
+    const now = new Date().getTime();
+    if (now - lastTap < 400) {
+      e.currentTarget.classList.toggle('flipped');
+      e.preventDefault();
+    }
+    lastTap = now;
+  });
+});
